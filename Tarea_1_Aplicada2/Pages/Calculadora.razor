@@ -1,0 +1,84 @@
+﻿@page "/Calculadora"
+@using Tarea_1_Aplicada2.Data;
+
+<h3>Calculadora</h3>
+
+<EditForm Model="Variable" OnValidSubmit="Calcular">
+    <DataAnnotationsValidator />
+
+    <div class="form-group">
+        <label>Numero 1:</label>
+        <InputNumber @bind-Value="Variable.Numero1" />
+        <ValidationMessage For=@(() => Variable.Numero1) />
+    </div>
+
+    <p />
+
+    <div class=" form-group">
+        <label>Numero 2:</label>
+        <InputNumber @bind-Value="Variable.Numero2" />
+        <ValidationMessage For=@(() => Variable.Numero2) />
+    </div>
+
+    <p />
+
+    <div class=" form-group">
+      La Suma = <InputNumber @bind-Value="Variable.ResultadoSuma" readonly="true" />
+    </div>
+
+    <p />
+
+    <div class=" form-group">
+        La  Resta = <InputNumber @bind-Value="Variable.ResultadoResta" readonly="true" />
+    </div>
+
+    <p />
+
+    <div class=" form-group">
+     Multiplicacion = <InputNumber @bind-Value="Variable.ResultadoMultiplicacion" readonly="true" />
+    </div>
+
+    <p />
+
+    <div class=" form-group">
+        <button @onclick="Limpiar">Nuevo</button>
+        <button type="submit" @onclick="Calcular">Calcular</button>
+    </div>
+
+
+</EditForm>
+
+@code {
+
+    Variables Variable = new Variables();
+
+
+    private void Limpiar()
+    {
+        Variable = new Variables();
+    }
+
+
+    private void Calcular()
+    {
+        ResultadoSuma();
+        ResultadoResta();
+        ResultadoMultiplicacion();
+    }
+
+    private void ResultadoSuma()
+    {
+        Variable.ResultadoSuma = Variable.Numero1 + Variable.Numero2;
+    }
+
+    private void ResultadoResta()
+    {
+        Variable.ResultadoResta = Variable.Numero1 - Variable.Numero2;
+    }
+
+    private void ResultadoMultiplicacion()
+    {
+        Variable.ResultadoMultiplicacion = Variable.Numero1 * Variable.Numero2;
+    }
+
+}
